@@ -4,7 +4,7 @@ services:
     build:
       context: $PWD/dockerfile
       dockerfile: Dockerfile
-    port:
+    ports:
       - "20022:22"
     volumes:
       - $PWD/project:/root/project
