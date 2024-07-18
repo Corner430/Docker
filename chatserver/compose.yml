@@ -7,4 +7,4 @@ services:
     ports:
       - "20022:22"
     volumes:
-      - $PWD/../project:/root/chatserver
+      - $PWD/project:/root/chatserver

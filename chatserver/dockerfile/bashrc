@@ -1,5 +1,5 @@
 
 # startup run
-if [ -f /root/start_ssh.sh ]; then
-    . /root/start_ssh.sh
+if [ -f /root/startup.sh ]; then
+    . /root/startup.sh
 fi

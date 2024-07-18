@@ -30,10 +30,10 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
    echo 'root:1' | chpasswd
 
 # 拷贝 ssh 启动脚本
-COPY start_ssh.sh /root/start_ssh.sh
+COPY startup.sh /root/startup.sh
 
 # 增加可执行权限
-RUN chmod +x /root/start_ssh.sh
+RUN chmod +x /root/startup.sh
 
 # 写追加到 .bashrc 文件
 ADD bashrc /root/bashrc  
@@ -64,6 +64,12 @@ RUN mv /root/build/release-install-cpp11/lib/libmuduo* /usr/local/lib
 # 删除 muduo 目录
 RUN rm -rf /root/muduo
 RUN rm -rf /root/build
+
+# 创建 MySQL 数据库和表格
+COPY chat.sql /root/chat.sql
+RUN service mysql start && \
+    mysql -u root -p1 < /root/chat.sql && \
+    service mysql stop
 
 # 默认启动 /bin/bash
 CMD ["/bin/bash"]

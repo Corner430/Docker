@@ -29,10 +29,10 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
    echo 'root:1' | chpasswd
 
 # 拷贝 ssh 启动脚本
-COPY start_ssh.sh /root/start_ssh.sh
+COPY startup.sh /root/startup.sh
 
 # 增加可执行权限
-RUN chmod +x /root/start_ssh.sh
+RUN chmod +x /root/startup.sh
 
 # 写追加到 .bashrc 文件
 ADD bashrc /root/bashrc  
@@ -41,6 +41,12 @@ RUN rm -f /root/bashrc
 
 # 创建 /root/project 文件夹
 RUN mkdir /root/project
+
+# 创建 MySQL 数据库和表格
+# COPY create_tables.sql /root/create_tables.sql
+# RUN service mysql start && \
+#     mysql -u root -p1 < /root/create_tables.sql && \
+#     service mysql stop
 
 # 默认启动 /bin/bash
 CMD ["/bin/bash"]
