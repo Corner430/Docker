@@ -61,14 +61,22 @@ RUN $PWD/build.sh install
 RUN mv /root/build/release-install-cpp11/include/muduo /usr/include/muduo
 RUN mv /root/build/release-install-cpp11/lib/libmuduo* /usr/local/lib
 
+# 变更工作目录
+WORKDIR /root
+
 # 删除 muduo 目录
 RUN rm -rf /root/muduo
 RUN rm -rf /root/build
 
-# 创建 MySQL 数据库和表格
+# 创建数据库
+RUN service mysql start && \
+    mysql -u root -p1 -e "CREATE DATABASE IF NOT EXISTS chat;" && \
+    service mysql stop
+
+# 复制 SQL 文件并导入数据
 COPY chat.sql /root/chat.sql
 RUN service mysql start && \
-    mysql -u root -p1 < /root/chat.sql && \
+    mysql -u root -p1 chat < /root/chat.sql && \
     service mysql stop
 
 # 默认启动 /bin/bash

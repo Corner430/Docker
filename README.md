@@ -2,7 +2,7 @@
 
 - 开发环境
     - [MySQL-Connection-Pool](https://github.com/Corner430/MySQL-Connection-Pool)
-    - [chatserver 单机版](https://github.com/Corner430/chatserver)
+    - [chatserver 单机版](https://github.com/Corner430/chatserver-standalone)
     - [chatserver 集群版](https://github.com/Corner430/chatserver)
 
 - 生产环境

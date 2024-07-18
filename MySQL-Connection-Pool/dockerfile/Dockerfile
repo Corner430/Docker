@@ -42,10 +42,15 @@ RUN rm -f /root/bashrc
 # 创建 /root/project 文件夹
 RUN mkdir /root/project
 
-# 创建 MySQL 数据库和表格
-# COPY create_tables.sql /root/create_tables.sql
+# # 创建数据库
 # RUN service mysql start && \
-#     mysql -u root -p1 < /root/create_tables.sql && \
+#     mysql -u root -p1 -e "CREATE DATABASE IF NOT EXISTS chat;" && \
+#     service mysql stop
+
+# # 复制 SQL 文件并导入数据
+# COPY chat.sql /root/chat.sql
+# RUN service mysql start && \
+#     mysql -u root -p1 chat < /root/chat.sql && \
 #     service mysql stop
 
 # 默认启动 /bin/bash
