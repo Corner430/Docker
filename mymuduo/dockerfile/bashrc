@@ -1,0 +1,5 @@
+
+# startup run
+if [ -f /root/startup.sh ]; then
+    . /root/startup.sh
+fi
