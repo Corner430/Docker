@@ -41,7 +41,7 @@ RUN echo "$(cat /root/bashrc)" >> /root/.bashrc
 RUN rm -f /root/bashrc
 
 # 创建 /root/project 文件夹
-RUN mkdir /root/chatserver
+RUN mkdir /root/project
 
 # 下载 json.hpp 到 /usr/include
 # RUN wget https://github.com/nlohmann/json/releases/download/v3.11.3/json.hpp -O /usr/include/json.hpp
