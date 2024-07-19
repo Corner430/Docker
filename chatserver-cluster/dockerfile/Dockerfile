@@ -95,16 +95,19 @@ RUN ./auto/configure --with-stream
 RUN make && make install
 
 # 变更工作目录
-WORKDIR /root
+WORKDIR /usr/local/nginx/conf
 
 # 拷贝 nginx 配置文件自动脚本
 COPY insert_stream.sh /usr/local/nginx/conf/insert_stream.sh
 
 # 增加可执行权限
-RUN chmod +x /usr/local/nginx/conf/insert_stream.sh
+RUN chmod +x insert_stream.sh
 
 # 运行 nginx 配置文件自动脚本
-RUN /usr/local/nginx/conf/insert_stream.sh
+RUN ./insert_stream.sh
+
+# 变更工作目录
+WORKDIR /root
 
 # 删除自动脚本
 RUN rm -f /usr/local/nginx/conf/insert_stream.sh
